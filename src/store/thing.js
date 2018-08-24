@@ -1,20 +1,30 @@
+import uuid from 'uuid/v1';
+
 // Actions
 const ADD = 'Thing/ADD';
 
 // Reducer
-export default function reducer(state = {}, action) {
-  switch (action.type) {
+export default function reducer(state = [], action) {
+
+  console.log({action});
+
+  const { type, payload } = action;
+
+  switch (type) {
     case ADD:
-      return {
+      return [
         ...state,
-        ...action.payload
-      };
+        payload
+      ];
     default: return state;
   }
 }
 
 // Action Creators
 export function addThing(thing) {
+  
+  thing.id = uuid();
+
   return {
     type: ADD,
     payload: thing
