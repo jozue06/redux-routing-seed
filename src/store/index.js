@@ -2,13 +2,10 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import thingReducer from './thing';
+import shoeReducer from './shoe';
 
-const appReducer = combineReducers({thingState: thingReducer});
+const appReducer = combineReducers({thingState: thingReducer, shoeState : shoeReducer});
 
-export default createStore(appReducer, applyMiddleware(thunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Can't get to work with REDUX Dev tools :(
-  
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// export default () => createStore(appReducer, composeEnhancers(applyMiddleware(thunk)));
+export default createStore(appReducer, composeEnhancers(applyMiddleware(thunk)));
