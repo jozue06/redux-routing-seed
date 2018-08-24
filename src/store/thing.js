@@ -28,3 +28,14 @@ export function addThing(thing) {
     payload: thing
   }  
 }
+
+export function addThingAsync(thing) {
+
+  return dispatch => {
+    setTimeout(() => {
+      // Yay! Can invoke sync or async actions with `dispatch`
+      dispatch(addThing(thing));
+    }, 1000);
+  };
+}
+

@@ -1,17 +1,26 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { addThing } from '../store/thing';
+import { addThing, addThingAsync } from '../store/thing';
 
 class Dashboard extends Component {
+
+  createRandomThing() {
+    return { name: 'thing' + Math.floor(Math.random() * 100) };
+  }
   render() {
     return (
       <Fragment>
         <h1>Dashboard</h1>
         <h2>Thing count: {this.props.things.length}</h2>
         <button
-          onClick={() => this.props.addThing({ name: 'thing' + Math.floor(Math.random() * 100) })}>
+          onClick={() => this.props.addThing(this.createRandomThing())}>
           Add Random Thing
-          </button>
+        </button>
+        <br />
+        <button
+          onClick={() => this.props.addThingAsync(this.createRandomThing())}>
+          Add Random Thing Async
+        </button>
 
         {this.props.things.length ?
           
@@ -29,6 +38,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = ({ thingState }) => ({ things: thingState });
-const mapDispatchToProps = { addThing };
+const mapDispatchToProps = { addThing, addThingAsync };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
