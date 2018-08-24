@@ -6,8 +6,6 @@ const ADD = 'Thing/ADD';
 // Reducer
 export default function reducer(state = [], action) {
 
-  console.log({action});
-
   const { type, payload } = action;
 
   switch (type) {
