@@ -2,19 +2,20 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addThing, addThingAsync } from '../store/thing';
 import superagent from 'superagent'
+
 class Dashboard extends Component {
 
-componentDidMount(){
-  // connect
-superagent
-.get('http://localhost:3333/login')
-.auth('test','fun')
-.then(res => {
-  console.log('yay', res.text)
-  let token = res.text;
-  localStorage.setItem('token',token)
-})
-}
+  componentDidMount() {
+    // connect
+    superagent
+      .get('https://lab35-josh.herokuapp.com/login')
+      .auth('test', 'fun')
+      .then(res => {
+        console.log('yay', res.text)
+        let token = res.text;
+        localStorage.setItem('token', token)
+      })
+  }
 
   createRandomThing() {
     return { name: 'thing' + Math.floor(Math.random() * 100) };
@@ -35,13 +36,13 @@ superagent
         </button>
 
         {this.props.things.length ?
-          
+
           <ul>
             {this.props.things.map(thing => <li key={thing.id}>{thing.name}</li>)}
           </ul>
-          
+
           :
-          
+
           <h2>No things :(</h2>
         }
       </Fragment>
