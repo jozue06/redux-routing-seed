@@ -1,8 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addThing, addThingAsync } from '../store/thing';
-
+import superagent from 'superagent'
 class Dashboard extends Component {
+
+componentDidMount(){
+  // connect
+superagent
+.get('http://localhost:3333/login')
+.auth('test','fun')
+.then(res => {
+  console.log('yay', res.text)
+  let token = res.text;
+  localStorage.setItem('token',token)
+})
+}
 
   createRandomThing() {
     return { name: 'thing' + Math.floor(Math.random() * 100) };
